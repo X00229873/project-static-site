@@ -1,0 +1,144 @@
+{
+  "Participants": [
+    {
+      "ParticipantId": "user1",
+      "ParticipantRole": "CUSTOMER"
+    },
+    {
+      "ParticipantId": "bot1",
+      "ParticipantRole": "AGENT"
+    }
+  ],
+  "Version": "1.1.0",
+  "ContentMetadata": {
+    "RedactionTypes": [
+      "PII"
+    ],
+    "Output": "Raw"
+  },
+  "CustomerMetadata": {
+    "ContactId": "0d19cae3-8802-4bbf-ac10-496b0e81d580"
+  },
+  "Transcript": [
+    {
+      "ParticipantId": "user1",
+      "Id": "1",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "2",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "3",
+      "Content": "VPN is not connecting"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "4",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "5",
+      "Content": "I can't connect to Wi-Fi"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "6",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "7",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "8",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "9",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "10",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "11",
+      "Content": "My internet is down"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "12",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "13",
+      "Content": "VPN is not connecting"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "14",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "15",
+      "Content": "My internet is down"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "16",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "17",
+      "Content": "My internet is down"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "18",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "19",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "20",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "21",
+      "Content": "VPN is not connecting"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "22",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "23",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "24",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    }
+  ]
+}

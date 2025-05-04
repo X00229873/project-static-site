@@ -1,0 +1,134 @@
+{
+  "Participants": [
+    {
+      "ParticipantId": "user1",
+      "ParticipantRole": "CUSTOMER"
+    },
+    {
+      "ParticipantId": "bot1",
+      "ParticipantRole": "AGENT"
+    }
+  ],
+  "Version": "1.1.0",
+  "ContentMetadata": {
+    "RedactionTypes": [
+      "PII"
+    ],
+    "Output": "Raw"
+  },
+  "CustomerMetadata": {
+    "ContactId": "1b147521-0572-43fe-906a-a7c0d35c8905"
+  },
+  "Transcript": [
+    {
+      "ParticipantId": "user1",
+      "Id": "1",
+      "Content": "VPN is not connecting"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "2",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "3",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "4",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "5",
+      "Content": "VPN is not connecting"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "6",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "7",
+      "Content": "I can't connect to Wi-Fi"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "8",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "9",
+      "Content": "VPN is not connecting"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "10",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "11",
+      "Content": "I can't connect to Wi-Fi"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "12",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "13",
+      "Content": "My internet is down"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "14",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "15",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "16",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "17",
+      "Content": "I can't connect to Wi-Fi"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "18",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "19",
+      "Content": "Trouble with the network"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "20",
+      "Content": "Let's troubleshoot that. Are you at the office or remote?"
+    },
+    {
+      "ParticipantId": "user1",
+      "Id": "21",
+      "Content": "I can't connect to Wi-Fi"
+    },
+    {
+      "ParticipantId": "bot1",
+      "Id": "22",
+      "Content": "Are you facing issues with Wi-Fi, VPN, or both?"
+    }
+  ]
+}
