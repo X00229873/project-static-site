@@ -154,22 +154,23 @@
     }
 
     function loginWithCognito() {
-      const domain = "pulsepointcare-auth-123456789012.auth.us-east-1.amazoncognito.com";
-      const clientId = "6fnj51lr8somrqhnbc7cd5t7r1";
-      const redirectUri = "http://pulsepointcare-website-us-east-1-123456789012.s3-website-us-east-1.amazonaws.com";
+      const domain = "YOUR_COGNITO_DOMAIN.auth.us-east-1.amazoncognito.com";
+      const clientId = "YOUR_CLIENT_ID";
+      const redirectUri = "https://YOUR_CLOUDFRONT_DOMAIN";
       const loginUrl = `https://${domain}/login?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`;
       window.location.href = loginUrl;
     }
 
     function logoutFromCognito() {
-      const domain = "pulsepointcare-auth-123456789012.auth.us-east-1.amazoncognito.com";
-      const clientId = "6fnj51lr8somrqhnbc7cd5t7r1";
-      const logoutUri = "http://pulsepointcare-website-us-east-1-123456789012.s3-website-us-east-1.amazonaws.com";
+      const domain = "YOUR_COGNITO_DOMAIN.auth.us-east-1.amazoncognito.com";
+      const clientId = "YOUR_CLIENT_ID";
+      const logoutUri = "https://YOUR_CLOUDFRONT_DOMAIN";
       const logoutUrl = `https://${domain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
       window.location.href = logoutUrl;
     }
   </script>
 
+  <!-- Optional: Kommunicate Chat Widget -->
   <script type="text/javascript">
     (function(d, m){
         var kommunicateSettings = 

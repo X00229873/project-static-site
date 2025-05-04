@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Static website with Cognito login
+Description: Static website with CloudFront and Cognito login
 
 Parameters:
   AppName:
@@ -27,6 +27,29 @@ Resources:
             Action: "s3:GetObject"
             Resource: !Sub "${StaticSiteBucket.Arn}/*"
 
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        DefaultRootObject: index.html
+        Origins:
+          - DomainName: !Sub "${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+            Id: S3Origin
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+        DefaultCacheBehavior:
+          AllowedMethods: [GET, HEAD]
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+        PriceClass: PriceClass_100
+
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -52,9 +75,9 @@ Resources:
         - ALLOW_REFRESH_TOKEN_AUTH
         - ALLOW_USER_PASSWORD_AUTH
       CallbackURLs:
-        - !Sub "http://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+        - !Sub "https://${CloudFrontDistribution.DomainName}"
       LogoutURLs:
-        - !Sub "http://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+        - !Sub "https://${CloudFrontDistribution.DomainName}"
 
   UserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
@@ -64,9 +87,9 @@ Resources:
 
 Outputs:
   WebsiteURL:
-    Description: Static site URL
-    Value: !GetAtt StaticSiteBucket.WebsiteURL
+    Description: HTTPS CloudFront URL of the static site
+    Value: !Sub "https://${CloudFrontDistribution.DomainName}"
 
   CognitoHostedLogin:
-    Description: Hosted UI Login URL
-    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?response_type=token&client_id=${UserPoolClient}&redirect_uri=http://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+    Description: Hosted UI Login URL with secure redirect
+    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?response_type=token&client_id=${UserPoolClient}&redirect_uri=https://${CloudFrontDistribution.DomainName}"
