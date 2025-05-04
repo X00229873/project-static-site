@@ -4,24 +4,23 @@ Description: Static website with Cognito login
 Parameters:
   AppName:
     Type: String
-    Default: pulsepointcare   # MUST be lowercase
-    Description: Lowercase name for your app (used in resource names)
+    Default: pulsepointcare
+    Description: Lowercase name for your app
 
 Resources:
   StaticSiteBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${AppName}-website-${AWS::Region}-${AWS::AccountId}"
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: index.html
-      AccessControl: PublicRead
 
   StaticSiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
       Bucket: !Ref StaticSiteBucket
       PolicyDocument:
+        Version: "2012-10-17"
         Statement:
           - Effect: Allow
             Principal: "*"
@@ -60,7 +59,7 @@ Resources:
   UserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      Domain: !Sub "${AppName}-auth-${AWS::AccountId}"   # Must be globally unique
+      Domain: !Sub "${AppName}-auth-${AWS::AccountId}"
       UserPoolId: !Ref UserPool
 
 Outputs:
