@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse Point Care</title>
+  <style>
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #f5f8fa, #d7e9f7);
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #0077cc, #005b96);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .logo {
+      width: 100px;
+    }
+    main {
+      max-width: 1100px;
+      margin: 60px auto 20px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    section h2 {
+      color: #005b96;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    section p {
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    footer {
+      background-color: #f1f1f1;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+      margin-top: 40px;
+    }
+    /* Optional menu drawer */
+    .drawer {
+      display: none;
+      background: white;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      padding: 20px;
+      z-index: 1000;
+    }
+    .drawer.open {
+      display: block;
+    }
+    .drawer a {
+      display: block;
+      margin-bottom: 20px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .drawer a:hover {
+      color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="menu-icon" onclick="toggleDrawer()">☰</div>
+    <img src="img/logo.png" alt="Pulse Point Care Logo" class="logo">
+  </header>
+
+  <!-- Side Drawer Menu -->
+  <div class="drawer" id="drawer">
+    <a href="#about" onclick="toggleDrawer()">About Us</a>
+    <a href="#services" onclick="toggleDrawer()">Our Services</a>
+    <a href="#contact" onclick="toggleDrawer()">Contact</a>
+  </div>
+
+  <main>
+    <section id="about">
+      <h2>About Pulse Point Care</h2>
+      <p>
+        At Pulse Point Care, we bridge technology and healthcare to create seamless, accessible, and personalized support solutions.
+        Our mission is to empower individuals and organizations through innovative digital health services and compassionate care.
+      </p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <p>
+        • 24/7 Virtual Health Assistance<br/>
+        • Smart IT Support for Healthcare Systems<br/>
+        • Patient Portal Support and Troubleshooting<br/>
+        • Remote Diagnostics and Health Monitoring<br/>
+        • Secure Cloud-based Data Solutions
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        Need help or have a question? Reach out to our team through the chat widget or email us at <strong>support@pulsepointcare.com</strong>.
+        We're here to support your digital health journey, every step of the way.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Pulse Point Care. All rights reserved.
+  </footer>
+
+  <!-- JavaScript to open/close menu -->
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+    }
+  </script>
+
+  <!-- Kommunicate Chat Widget -->
+  <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"2a165cca3cccd06d0487d29220bb17e38","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+  </script>
+
+</body>
+</html>
