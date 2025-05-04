@@ -14,6 +14,11 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: false      # 👈 ALLOW bucket policy to make content public
+        RestrictPublicBuckets: false
 
   StaticSiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
