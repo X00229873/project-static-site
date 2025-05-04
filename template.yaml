@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Static website with CloudFront and Cognito login
+Description: Static website using S3 + CloudFront (no Cognito)
 
 Parameters:
   AppName:
@@ -50,46 +50,7 @@ Resources:
           CloudFrontDefaultCertificate: true
         PriceClass: PriceClass_100
 
-  UserPool:
-    Type: AWS::Cognito::UserPool
-    Properties:
-      UserPoolName: !Sub "${AppName}-userpool"
-      AutoVerifiedAttributes: [email]
-      UsernameAttributes: [email]
-      Policies:
-        PasswordPolicy:
-          MinimumLength: 8
-          RequireUppercase: true
-          RequireLowercase: true
-          RequireNumbers: true
-          RequireSymbols: false
-
-  UserPoolClient:
-    Type: AWS::Cognito::UserPoolClient
-    Properties:
-      ClientName: webclient
-      UserPoolId: !Ref UserPool
-      GenerateSecret: false
-      ExplicitAuthFlows:
-        - ALLOW_USER_SRP_AUTH
-        - ALLOW_REFRESH_TOKEN_AUTH
-        - ALLOW_USER_PASSWORD_AUTH
-      CallbackURLs:
-        - !Sub "https://${CloudFrontDistribution.DomainName}"
-      LogoutURLs:
-        - !Sub "https://${CloudFrontDistribution.DomainName}"
-
-  UserPoolDomain:
-    Type: AWS::Cognito::UserPoolDomain
-    Properties:
-      Domain: !Sub "${AppName}-auth-${AWS::AccountId}"
-      UserPoolId: !Ref UserPool
-
 Outputs:
   WebsiteURL:
     Description: HTTPS CloudFront URL of the static site
     Value: !Sub "https://${CloudFrontDistribution.DomainName}"
-
-  CognitoHostedLogin:
-    Description: Hosted UI Login URL with secure redirect
-    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?response_type=token&client_id=${UserPoolClient}&redirect_uri=https://${CloudFrontDistribution.DomainName}"
