@@ -4,8 +4,8 @@ Description: Static website with Cognito login
 Parameters:
   AppName:
     Type: String
-    Default: PulsePointCare
-    Description: Name for your application
+    Default: pulsepointcare   # MUST be lowercase
+    Description: Lowercase name for your app (used in resource names)
 
 Resources:
   StaticSiteBucket:
@@ -31,7 +31,7 @@ Resources:
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Sub "${AppName}-UserPool"
+      UserPoolName: !Sub "${AppName}-userpool"
       AutoVerifiedAttributes: [email]
       UsernameAttributes: [email]
       Policies:
@@ -45,7 +45,7 @@ Resources:
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: WebClient
+      ClientName: webclient
       UserPoolId: !Ref UserPool
       GenerateSecret: false
       ExplicitAuthFlows:
@@ -53,14 +53,14 @@ Resources:
         - ALLOW_REFRESH_TOKEN_AUTH
         - ALLOW_USER_PASSWORD_AUTH
       CallbackURLs:
-        - !Sub "https://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+        - !Sub "http://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
       LogoutURLs:
-        - !Sub "https://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+        - !Sub "http://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
 
   UserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      Domain: !Sub "${AppName}-auth-${AWS::AccountId}"
+      Domain: !Sub "${AppName}-auth-${AWS::AccountId}"   # Must be globally unique
       UserPoolId: !Ref UserPool
 
 Outputs:
@@ -70,4 +70,4 @@ Outputs:
 
   CognitoHostedLogin:
     Description: Hosted UI Login URL
-    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?response_type=token&client_id=${UserPoolClient}&redirect_uri=https://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?response_type=token&client_id=${UserPoolClient}&redirect_uri=http://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
