@@ -29,6 +29,19 @@
     .logo {
       width: 100px;
     }
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .auth-buttons button {
+      padding: 8px 16px;
+      background-color: #ffffff;
+      color: #005b96;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
     main {
       max-width: 1100px;
       margin: 60px auto 20px auto;
@@ -57,7 +70,6 @@
       color: #666;
       margin-top: 40px;
     }
-    /* Optional menu drawer */
     .drawer {
       display: none;
       background: white;
@@ -91,9 +103,12 @@
   <header>
     <div class="menu-icon" onclick="toggleDrawer()">☰</div>
     <img src="img/logo.png" alt="Pulse Point Care Logo" class="logo">
+    <div class="auth-buttons">
+      <button onclick="loginWithCognito()">Login</button>
+      <button onclick="logoutFromCognito()">Logout</button>
+    </div>
   </header>
 
-  <!-- Side Drawer Menu -->
   <div class="drawer" id="drawer">
     <a href="#about" onclick="toggleDrawer()">About Us</a>
     <a href="#services" onclick="toggleDrawer()">Our Services</a>
@@ -133,14 +148,28 @@
     &copy; 2025 Pulse Point Care. All rights reserved.
   </footer>
 
-  <!-- JavaScript to open/close menu -->
   <script>
     function toggleDrawer() {
       document.getElementById('drawer').classList.toggle('open');
     }
+
+    function loginWithCognito() {
+      const domain = "pulsepointcare-auth-123456789012.auth.us-east-1.amazoncognito.com";
+      const clientId = "6fnj51lr8somrqhnbc7cd5t7r1";
+      const redirectUri = "http://pulsepointcare-website-us-east-1-123456789012.s3-website-us-east-1.amazonaws.com";
+      const loginUrl = `https://${domain}/login?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+      window.location.href = loginUrl;
+    }
+
+    function logoutFromCognito() {
+      const domain = "pulsepointcare-auth-123456789012.auth.us-east-1.amazoncognito.com";
+      const clientId = "6fnj51lr8somrqhnbc7cd5t7r1";
+      const logoutUri = "http://pulsepointcare-website-us-east-1-123456789012.s3-website-us-east-1.amazonaws.com";
+      const logoutUrl = `https://${domain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+      window.location.href = logoutUrl;
+    }
   </script>
 
-  <!-- Kommunicate Chat Widget -->
   <script type="text/javascript">
     (function(d, m){
         var kommunicateSettings = 

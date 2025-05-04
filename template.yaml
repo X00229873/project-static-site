@@ -1,55 +1,73 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Deploy static site with Cognito login
+Description: Static website with Cognito login
+
+Parameters:
+  AppName:
+    Type: String
+    Default: PulsePointCare
+    Description: Name for your application
 
 Resources:
-  WebBucket:
+  StaticSiteBucket:
     Type: AWS::S3::Bucket
     Properties:
+      BucketName: !Sub "${AppName}-website-${AWS::Region}-${AWS::AccountId}"
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: index.html
       AccessControl: PublicRead
 
-  BucketPolicy:
+  StaticSiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref WebBucket
+      Bucket: !Ref StaticSiteBucket
       PolicyDocument:
         Statement:
           - Effect: Allow
             Principal: "*"
-            Action: s3:GetObject
-            Resource: !Sub "${WebBucket.Arn}/*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${StaticSiteBucket.Arn}/*"
 
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: PulsePointUserPool
+      UserPoolName: !Sub "${AppName}-UserPool"
       AutoVerifiedAttributes: [email]
       UsernameAttributes: [email]
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireUppercase: true
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
 
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: PulsePointWebClient
+      ClientName: WebClient
       UserPoolId: !Ref UserPool
       GenerateSecret: false
       ExplicitAuthFlows:
-        - ALLOW_USER_PASSWORD_AUTH
-        - ALLOW_REFRESH_TOKEN_AUTH
         - ALLOW_USER_SRP_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_USER_PASSWORD_AUTH
+      CallbackURLs:
+        - !Sub "https://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
+      LogoutURLs:
+        - !Sub "https://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
 
   UserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      Domain: pulsepoint-login-demo
+      Domain: !Sub "${AppName}-auth-${AWS::AccountId}"
       UserPoolId: !Ref UserPool
 
 Outputs:
   WebsiteURL:
-    Value: !GetAtt WebBucket.WebsiteURL
-    Description: URL of the static website
+    Description: Static site URL
+    Value: !GetAtt StaticSiteBucket.WebsiteURL
 
-  CognitoLoginURL:
-    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?client_id=${UserPoolClient}&response_type=token&redirect_uri=http://localhost"
-    Description: Hosted UI login URL
+  CognitoHostedLogin:
+    Description: Hosted UI Login URL
+    Value: !Sub "https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/login?response_type=token&client_id=${UserPoolClient}&redirect_uri=https://${StaticSiteBucket}.s3-website-${AWS::Region}.amazonaws.com"
