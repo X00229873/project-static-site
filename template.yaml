@@ -17,7 +17,7 @@ Resources:
       PublicAccessBlockConfiguration:
         BlockPublicAcls: true
         IgnorePublicAcls: true
-        BlockPublicPolicy: false      # 👈 ALLOW bucket policy to make content public
+        BlockPublicPolicy: false      
         RestrictPublicBuckets: false
 
   StaticSiteBucketPolicy:
